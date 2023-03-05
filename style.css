@@ -433,7 +433,10 @@ header {
 #read{
     text-decoration: none;
     color: var(--clr-light);
+    font-weight: var(--fw-bold);
 }
+
+
 
 #read:hover{
     text-decoration: underline;
@@ -451,7 +454,8 @@ header {
 
     #read{
         text-decoration: none;
-        color: var(--clr-light);
+        color: var(--clr-accent);
+        font-weight: bold;
     }
 
     .Mywork+.Mywork {
