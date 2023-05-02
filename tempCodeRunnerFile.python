@@ -1,0 +1,9 @@
+import subprocess
+
+def convert_pdf_to_html(input_file, output_file):
+    subprocess.call(['pdf2htmlEX', input_file, output_file])
+
+# Example usage
+input_file = "C:/Users/A cer/OneDrive/Desktop/RequestForm-5eef36ad-5131-4cf0-a89f-78cb309082d8.pdf"
+output_file = 'my_file.html'
+convert_pdf_to_html(input_file, output_file)

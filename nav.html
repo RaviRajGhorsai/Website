@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+     
+        .nav{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            min-height: 8vh;
+            border: 1px solid red;
+           
+        }
+        .nav__list{
+            width: 70%;
+            display: flex;
+            justify-content: space-around;
+            border: 1px solid black;
+           align-items: center;
+           list-style: none;
+         
+       
+           
+        }
+        .hamburger{
+            <!-- display: none; -->
+        }
+        .hamburger > div{
+            height: 5px;
+            width: 25px;
+            background-color: red;
+            
+        }
+        @media(max-width:768px){
+            body{
+               overflow-x: hidden;
+            }
+            .nav__list{
+                position: absolute;
+                right: 0;
+                display: flex;
+                flex-direction: column;
+                height: 92vh;
+                margin-top: 100vh;
+                transform: translate(100%);
+                background-color: grey;
+                transition: all 0.2s ease;
+               
+            }
+            .hamburger{
+                display: block;
+                display: flex;
+                gap: 5px;
+                flex-direction: column;
+            }
+            .toggle{
+                transform: translate(0%);
+              
+               
+            }
+
+        }
+    </style>
+</head>
+<body>
+
+        <nav class="nav">
+            <ul class="nav__list">
+                <li class="nav__item"><a href="#home" class="nav__link">Home</a></li>
+                <li class="nav__item"><a href="#services" class="nav__link">My Services</a></li>
+                <li class="nav__item"><a href="#about" class="nav__link">About me</a></li>
+                <li class="nav__item"><a href="#work" class="nav__link">My Work</a></li>
+            </ul>
+            <div class="hamburger">
+                <div class="bar bar1"></div>
+                <div class="bar bar2"></div>
+                <div class="bar bar3"></div>
+            </div>
+        </nav>
+
+    <script>
+        const hamburger=document.querySelector('.hamburger')
+        const navLink=document.querySelector('.nav__list')
+        hamburger.addEventListener('click',navToggle)
+
+        function navToggle(){
+          navLink.classList.toggle('toggle')
+        }
+    </script>
+</body>
+</html>
