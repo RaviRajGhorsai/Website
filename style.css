@@ -622,3 +622,71 @@ header {
         padding-left: 17.7%;
     }
 }
+
+/* pico ctf write ups */
+
+.pico_ctf_link{
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--clr-accent);
+}
+
+.pico_ctf_link:hover{
+    text-decoration: underline;
+    opacity: .5;
+}
+
+/* challenges solved */
+
+.challenges_solved a{
+    text-decoration: none;
+    color: var(--clr-accent);
+    font-size: larger;
+    font-weight: bold;
+}
+
+.challenges_solved a:hover{
+    text-decoration: underline;
+}
+
+.portfolio-item-individual ul{
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.portfolio-item-individual p{
+    font-size: larger;
+    
+}
+
+.portfolio-item-individual .challenge_link{
+    text-decoration: none;
+    color: var(--clr-accent);
+}
+
+.portfolio-item-individual .challenge_link:hover{
+    text-decoration: underline;
+}
+
+.img_picoCTF{
+    max-width: 100%;
+    height: 30%;
+    object-fit: cover;
+    width: 100%;
+    padding-left: 17.7%;
+}
+
+.portfolio-item-individual .solution{
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+
+    background-color: lightgray;
+}
+
+.portfolio-item-individual .solution div{
+    margin-left: 5%;
+    color: black;
+    font-weight: bold;
+}
