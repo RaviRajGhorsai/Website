@@ -1,9 +1,6 @@
 import os
 from cryptography.fernet import Fernet
 
-
-
-
 files = []
 
 for file in os.listdir():
@@ -14,10 +11,8 @@ for file in os.listdir():
 
 print(files)
 
-
 with open("thekey.key", "rb") as key:
 	secretkey = key.read()
-
 
 secretphrase = "perpendicular"
 

@@ -10,7 +10,7 @@
         <!-- Update these with your own fonts -->
         <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,900|Source+Sans+Pro:300,900&display=swap" rel="stylesheet">
         
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="/style.css">
 
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
@@ -23,17 +23,17 @@
     <body>
         <header>
             <div class="logo">
-                <img src="img/" alt="">
+                <img src="/img/" alt="">
             </div>
             <button class="nav-toggle" aria-label="toggle navigation">
                 <span class="hamburger"></span>
             </button>
             <nav class="nav">
                 <ul class="nav__list">
-                    <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
-                    <li class="nav__item"><a href="index.html#services" class="nav__link">My Services</a></li>
-                    <li class="nav__item"><a href="index.html#about" class="nav__link">About me</a></li>
-                    <li class="nav__item"><a href="index.html#work" class="nav__link">My Work</a></li>
+                    <li class="nav__item"><a href="/index.html" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="/index.html#services" class="nav__link">My Services</a></li>
+                    <li class="nav__item"><a href="/index.html#about" class="nav__link">About me</a></li>
+                    <li class="nav__item"><a href="/index.html#work" class="nav__link">My Work</a></li>
                 </ul>
             </nav>
         </header>
@@ -44,42 +44,41 @@
                 <strong>Ransomware</strong>
             </h1>
             <p class="section__subtitle section__subtitle--intro">My own little Ransomware</p>
-            <img src="img/ravi.JPG" alt="" class="intro__img">
+            <img src="/img/ravi.JPG" alt="" class="intro__img">
         </section>
         
         <div class="portfolio-item-individual">
             <p>Here's how I made a small demo ransomware.</p>
             <p>Ok let's start making our ransomware</p>
             <p>First we open Visual Studio Code and add python extensions. Make a python file named ransomware.py. Then we import os and cryptography Fernet.</p>
-            <img class="img_portfolio" src="document/import files.png" alt="">
+            <img class="img_portfolio" src="/img/import files.png" alt="">
             <p>To import cryptography Fernet we need to install cryprography from vs code terminal. Type pip install cryptography.</p>
-            <img class="img_portfolio" src="document/install cryptography.png" alt="">
+            <img class="img_portfolio" src="/img/install cryptography.png" alt="">
             <p>Then we need to look into the files in a folder so we create an array of file. Then we use for loop to look for files and save into file array.  </p>
-            <img class="img_portfolio" src="document/search files.png" alt="">
+            <img class="img_portfolio" src="/img/search files.png" alt="">
             <p>Then we have to create a key to encrypt all the files. So we make a new variable key and generate a key using Fernet.generate_key().</p>
-            <img class="img_portfolio" src="document/generate key.png" alt="">
+            <img class="img_portfolio" src="/img/generate key.png" alt="">
             <p>Then we open a file in write mode named thekey as thekey.key file. Then using for loop we store all the files of file array in 
                 new variable contents and open it in read mode. And encrypt the contents using Fernet(key).encrypt(contents).
             Also we type in a small messsage too.</p>
-            <img class="img_portfolio" src="document/encrypt files.png" alt="">
-             <p>So here's our small ransomware ready to execute. But we also need to decrypt the files later on so we write decrypt code. 
+            <img class="img_portfolio" src="/img/encrypt files.png" alt="">
+            <p>So here's our small ransomware ready to execute. But we also need to decrypt the files later on so we write decrypt code. 
                 So we make a new file decrypt.py and copy the code of ransomware.py. Since we need to make only a little changes.</p>
-                <p>First the few lines are same.</p>
-                <img class="img_portfolio" src="document/search files to decrypt.png" alt="">
-                <p>Now we need to open the thekey file that contains the key that we use it to decrypt the files. Remeber we have if condition to 
+            <p>First the few lines are same.</p>
+            <img class="img_portfolio" src="/img/search files to decrypt.png" alt="">
+            <p>Now we need to open the thekey file that contains the key that we use it to decrypt the files. Remeber we have if condition to 
                     leave some of the files from being encrypted. So we open thekey file in read mode and create a secretkey ro read the key. 
                     Then we create a secret phrase to encrypt the files.
-                </p>
-                <img class="img_portfolio" src="document/secret phrase.png" alt="">
-                <p>Now we neeed to see if the secret phrase is equal to the generated key or not.And the open the files and decrypt the files using 
+            </p>
+            <img class="img_portfolio" src="/img/secret phrase.png" alt="">
+            <p>Now we neeed to see if the secret phrase is equal to the generated key or not.And the open the files and decrypt the files using 
                     Fernet(secretkey).decrypt(contents), we have our encrypted files in the contents. </p>
-                <img class="img_portfolio" src="document/decrypt.png" alt="">
-                <p>So we have successfully encrypted and decrypted files using our code in python. We need to enter our secret phrase "perpendicular"
+            <img class="img_portfolio" src="/img/decrypt.png" alt="">
+            <p>So we have successfully encrypted and decrypted files using our code in python. We need to enter our secret phrase "perpendicular"
                     to encrypt the files. And we also have our message printed.</p>
-                    <p>You can download the ransomware.py file <a class="download"  href="./python/ransomware.py" download>here</a>. Also 
-                    you can download decrypt.py file <a class="download" href="./python/decrypt.py" download>here</a>.</p>
-
-                    
+            <p>You can download the ransomware.py file <a class="download"  href="https://github.com/RaviRajGhorsai/Ransomware-demo">here</a>. Also 
+                    you can download decrypt.py file <a class="download" href="/python/decrypt.py" download>here</a>.</p>
+                               
         </div>
         
         
@@ -113,7 +112,7 @@
         </footer>
         
         
-        <script src="index.js"></script>
+        <script src="/index.js"></script>
         
     </body>
 
